@@ -1,0 +1,365 @@
+/* styles.css */
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #2F4858;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    height: 50px; /* Adjust the height as needed */
+    width: auto; /* This keeps the aspect ratio of your logo */
+    /* Add more styling as needed */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info .username {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.user-info a.logout, .user-info a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.user-info a.logout:hover, .user-info a:hover {
+    background-color: #1DB954;
+}
+
+
+/* Update the .playlist-controls to handle the layout of the select-all header and buttons */
+.playlist-controls {
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left */
+    padding: 10px 20px;
+    background-color: #222;
+}
+
+.playlist-container {
+    padding: 20px;
+    background-color: #121212; /* Ensuring it matches the body background */
+}
+
+/* Playlist header and rows */
+
+
+/* Playlist row and song row styles for alignment */
+.playlist-row, .song-row, .playlist-header {
+    align-items: center; /* Centers items vertically */
+    gap: 10px;
+    padding: 10px;
+    background-color: #333;
+}
+
+/* Adjusting grid template columns */
+.playlist-header,
+.playlist-row,
+.song-list-header,
+.song-row {
+    display: grid;
+    grid-template-columns: 32px 3fr 2fr 3fr 2fr; /* Example: the first value is for the checkbox */
+    /* Include other properties such as gap, align-items, etc. */
+}
+
+.playlist-header {
+    font-weight: bold;
+}
+
+.playlist-songs-input::placeholder {
+    font-size: smaller; /* This sets the font size of the placeholder text to be smaller than the input text */
+    opacity: 1; /* Optional: ensures the placeholder text is not semi-transparent */
+}
+
+/* Additional styles for checkboxes to align with other content */
+.playlist-select {
+    align-self: center; /* This will vertically center the checkbox in the grid */
+}
+
+/* Style for the select-all header */
+.select-all-header {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem; /* Adjust the font size as needed */
+    color: #fefefe;
+    /*color: #1DB954; /* Spotify's brand green color */
+}
+
+
+/* Master checkbox styles */
+.master-checkbox {
+    cursor: pointer;
+    transform: scale(1.2); /* Adjust scale as needed */
+    margin-right: 10px; /* Ensure this aligns with the other checkboxes */
+}
+
+/* Song row checkboxes styles */
+.song-select {
+    transform: scale(1.1); /* Slightly smaller scale than master-checkbox */
+    margin-right: 10px; /* Align with the master checkbox margin */
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .song-select {
+        transform: scale(1); /* Smaller scale for small screens */
+    }
+}
+
+.playlist-row {
+    background-color: #181818;
+    border-bottom: 1px solid #282828;
+}
+
+.playlist-row:hover {
+    background-color: #282828;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #282828;
+    margin: 5% auto;
+    padding: 20px;
+    border: none;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label,
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    margin: auto;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: #ddd;
+}
+
+/* Form check styles */
+.form-check {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.form-check-input {
+    margin-right: 0.5rem;
+}
+
+.form-check-label {
+    color: #ddd;
+}
+
+/* Save button styles */
+#save-playlist-btn {
+    background-color: #DE6A34;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 1;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+}
+
+#save-playlist-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: #666;
+}
+
+/* Button styles */
+.btn-primary, .btn-secondary, .btn-danger, .btn-success {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.btn-primary{
+    background-color: #5d5d5d;
+    color: #fefefe;
+}
+
+.btn-secondary{
+    background-color: #DE6A34;
+    color: #fefefe;
+}
+
+.fa-refresh {
+    color: #DE6A34;
+    cursor: pointer; /* Makes the icon appear clickable */
+}
+
+.fa-refresh:hover {
+    color: #b2552a !important;
+    cursor: pointer; /* Makes the icon appear clickable */
+}
+
+/* Button hover effects */
+.btn-primary:hover { background-color: #282828; color: #fefefe;}
+.btn-secondary:hover { background-color: #b2552a; color: #fefefe;}
+.btn-danger:hover { background-color: #FECAA5; color: #DE6A34;}
+.btn-success:hover { background-color: #FECAA5; color: #DE6A34;}
+
+/* Modal styles */
+.modal-content {
+    margin: 5% auto;
+    width: 50%;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .song-select {
+        transform: scale(1); /* Smaller scale for small screens */
+    }
+}
+
+/* Define grid template columns with a specific size for checkboxes */
+.playlist-header,
+.playlist-row,
+.song-list-header,
+.song-row {
+    display: grid;
+    grid-template-columns: 40px 3fr 2fr 3fr 1fr; /* Adjusted the first value for the checkbox */
+    align-items: center; /* Centers items vertically */
+    /* Other styling */
+}
+
+/* Styles for checkboxes */
+.master-checkbox,
+.playlist-select,
+.song-select {
+    cursor: pointer;
+    /* Define fixed size for checkboxes */
+    width: 20px; /* Example fixed width */
+    height: 20px; /* Example fixed height */
+    /* Align the checkbox visually in the center of the cell */
+    margin-left: auto;
+    margin-right: auto;
+    /* Remove transform scale if you're using fixed width and height */
+}
+
+/* You might need to remove the transform: scale property to ensure that
+   the checkbox does not exceed its bounding box which can cause alignment issues */
+
+
+/* Close button styles */
+.close-button {
+    float: right;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #fff;
+}
+
+
+/* Text styles */
+.playlist-title,
+.playlist-creator,
+.playlist-type,
+.playlist-tracks {
+    color: #ddd;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* No playlist message */
+.no-playlists {
+    text-align: center;
+    padding: 20px;
+    color: #aaa;
+}
+
+
+/* Playlist Songs Container styles */
+.playlist-cover {
+    /* Adjust the size to match the target UI */
+    width: 150px; /* Example size */
+    height: 150px; /* Example size */
+    margin-right: 20px;
+}
+
+.fa-arrow-left, .fa-refresh {
+    /* Adjust size and color to match the target UI */
+    font-size: 1.5rem;
+    color: #DE6A34;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Style for play button overlay */
+.playlist-play-overlay {
+    position: absolute;
+    top: 50%; /* Adjust as needed */
+    left: 50%; /* Adjust as needed */
+    transform: translate(-50%, -50%);
+    font-size: 3rem; /* Example size */
+    color: #fff; /* Adjust color as needed */
+    cursor: pointer;
+}
+
+/* You may need to adjust the playlist detail layout */
+.playlist-info {
+    display: flex;
+    align-items: center;
+}
+
+/* Update song list styles */
+.song-list-header {
+    background-color: #333; /* Match the header background */
+    color: #fff; /* Text color */
+    /* Rest of your styles */
+}
+
