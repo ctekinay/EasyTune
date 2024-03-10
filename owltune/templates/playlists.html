@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Spotify Playlists</title>
+    <!-- Include Bootstrap CSS and Font Awesome for icons -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <!-- Replace 'Playlists' with an image for your logo -->
+    <img src="{{ url_for('static', filename='OwlTune_logo_dark_1600x900.png') }}" alt="App Logo" class="header-logo">
+    <div class="user-info">
+        Logged in as&nbsp;<span class="username">{{ username }}</span> (<a href="/logout">logout</a>)
+    </div>
+</div>
+
+    <!-- Flash Messages Section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Playlist Controls -->
+    <div class="playlist-controls">
+        <div class="select-all-header">
+            <!-- Add the refresh icon next to the master checkbox -->
+            <i class="fa fa-refresh" aria-hidden="true" id="refresh-playlists"></i>
+            &nbsp;&nbsp;Spotify Playlists
+        </div>
+        <button id="delete-selected" class="btn btn-primary">Delete Selected</button>
+        <button id="new-playlist" class="btn btn-secondary">New Playlist</button>
+    </div>
+        <!-- Playlist Container and Grid -->
+    <div class="playlist-container">
+        <div class="playlist-header">
+            <input type="checkbox" class="master-checkbox" id="master-select">
+            <div>Title</div>
+            <div>Tracks</div>
+            <div>Creator</div>
+            <div>Types</div>
+        </div>
+        <div class="playlist-grid">
+            <!-- Use a loop to generate playlist rows -->
+            {% if playlists %}
+                {% for playlist in playlists %}
+                    <div class="playlist-row" data-playlist-id="{{ playlist['id'] }}">
+                        <input type="checkbox" class="playlist-select">
+                        <div class="playlist-title">{{ playlist['name'] }}</div>
+                        <div class="playlist-tracks">{{ playlist['tracks']['total'] }} tracks</div>
+                        <div class="playlist-creator">{{ playlist['owner']['display_name'] }}</div>
+                        <div class="playlist-type">{{ 'Public' if playlist['public'] else ('Collaborative' if playlist['collaborative'] else 'Private') }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No playlists available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- New Playlist Modal -->
+    <div id="new-playlist-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Create a new playlist</h2>
+            <!-- The form for creating a new playlist -->
+            <form id="new-playlist-form" action="/create-playlist" method="POST">
+
+                <div class="form-group">
+                    <label for="playlist-title">Title (required)</label>
+                    <input type="text" id="playlist-title" name="title" required placeholder="Enter the playlist title" class="playlist-songs-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="playlist-description">Description (optional)</label>
+                    <textarea id="playlist-description" name="description" placeholder="Here is the playlist description (optional)" class="playlist-songs-input"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="playlist-songs">List of Songs (required)</label>
+                    <textarea id="playlist-songs" name="songs" required placeholder="Paste your DJpt generated list or manually enter each song on a new line as 'Artist - Song Title'. You can separate the artist and title using '-', '–', ':', or '|'. For example:&#10;Coldplay - Yellow&#10;Adele: Easy On Me&#10;The Weeknd | Blinding Lights. &#10;" class="playlist-songs-input"></textarea>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" id="playlist-private" name="private" class="form-check-input">
+                    <label for="playlist-private" class="form-check-label">Set privacy to Private</label>
+                </div>
+
+                <button type="submit" id="save-playlist-btn">Save playlist</button>
+            </form>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

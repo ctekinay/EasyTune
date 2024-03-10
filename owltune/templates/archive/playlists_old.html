@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Spotify Playlists</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #343a40;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-end; /* Changed alignment to right */
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            height: 100px; /* Adjust as needed */
+        }
+        .welcome {
+            font-size: 0.9em; /* Reduced font size */
+        }
+        .logout {
+            color: #dc3545;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .logout:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+        h1 img {
+            margin-right: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 0.9em;
+        }
+        ul li {
+            background: #495057;
+            border: 1px solid #6c757d;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        a {
+            text-decoration: none;
+            color: #17a2b8;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+        }
+        .playlists {
+            flex: 1;
+        }
+        .create-playlist-form {
+            flex: 1;
+            margin-left: 20px;
+        }
+        details {
+            background: #495057;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #6c757d;
+        }
+        summary {
+            cursor: pointer;
+            outline: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
+        /* Added new styles for form */
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        /* Added max-width for form inputs */
+        input[type="text"],
+        textarea {
+            width: 100%;
+            max-width: 400px; /* Set a maximum width for the input elements */
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #6c757d;
+            border-radius: 4px;
+            background-color: #495057;
+            color: #fff;
+        }
+        input[type="checkbox"] {
+            margin-top: 5px;
+            margin-right: 5px;
+        }
+        button[type="submit"] {
+            background-color: #17a2b8;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #138496;
+        }
+        /* Updated footer styles */
+        footer b {
+            color: #fff; /* Make "OwlTune" and "OwlView" white */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="welcome">
+            Logged in as <span id="username">{{ username }}</span> (<a href="/logout" class="logout">logout</a>)
+        </div>
+    </div>
+
+    <h1>Your <img src="/static/owltune/templates/spotify_logo.png" alt="Spotify Logo"> Playlists</h1>
+
+    <div class="container">
+        <div class="playlists">
+            <h2>Your Playlists</h2>
+            <ul>
+                {% for playlist in playlists %}
+                    <li>
+                        <a href="https://open.spotify.com/playlist/{{ playlist.id }}">{{ playlist.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="create-playlist-form">
+            <details>
+                <summary>Create New Playlist</summary>
+                <form method="POST" action="/create-playlist">
+                    <label for="playlist-name">Playlist Name (mandatory):</label>
+                    <input type="text" id="playlist-name" name="title" required>
+
+                    <label for="songs-text">List of songs (mandatory):</label>
+                    <textarea id="songs-text" name="songs" rows="4" required></textarea>
+
+                    <label for="private-checkbox">Make playlist private:</label>
+                    <input type="checkbox" id="private-checkbox" name="private"> <br>
+
+                    <button type="submit">Create Playlist</button>
+                </form>
+            </details>
+        </div>
+    </div>
+    <footer>
+        Created by <b>OwlTune</b>, an <b>OwlView</b> service
+    </footer>
+</body>
+</html>
