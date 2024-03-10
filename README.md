@@ -1,2 +1,3 @@
-# owltune
-Craft Playlists, Shape Moods - Best playlist manager money cannot buy
+# OWLTUNE
+## Craft Playlists, Shape Moods 
+### Best playlist manager money cannot buy
